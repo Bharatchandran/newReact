@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 
-
-let
 class App extends Component {
   constructor() {
     super();
