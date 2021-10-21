@@ -1,5 +1,15 @@
 import React, { Component } from "react";
 
+const SameFileFuncComp = (props) => {
+  return (
+    <div className="SameFileFuncComp">
+      <p>Props:</p>
+
+      <pre>{JSON.stringify(props, null, 2)}</pre>
+    </div>
+  );
+};
+
 class App extends Component {
   constructor() {
     super();
@@ -25,6 +35,7 @@ class App extends Component {
   }
   render() {
     //DO NOT USE TIMER OR SETTING STATES UINSIDE RENDER FUNCTION
+
     if (false && this.state.Salutation !== "Hello")
       console.log("render Called!");
     return (
@@ -34,6 +45,13 @@ class App extends Component {
           {this.state.Name}
         </p>
         <p>Timer: {this.state.Timer}</p>
+        <SameFileFuncComp
+          Name="Bharat"
+          arjun="true"
+          Krishna={true}
+          Praveen={15}
+        />
+        console.log();
       </div>
     );
   }
