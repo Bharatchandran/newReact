@@ -1,57 +1,54 @@
 import React, { Component } from "react";
 
-const SameFileFuncComp = (props) => {
-  return (
-    <div className="SameFileFuncComp">
-      <p>Props:</p>
-
-      <pre>{JSON.stringify(props, null, 2)}</pre>
-    </div>
-  );
-};
-
 class App extends Component {
-  constructor() {
-    super();
-    console.log("Constructor Called");
-  }
   state = {
-    Name: "Bharat",
-    Salutation: "Hola",
-    Timer: 1,
+    Name: "",
+    Refresh: false,
   };
-
   componentDidMount() {
-    setInterval(() => {
-      //Change the state after 5 seconds
-      this.setState({
-        Timer: this.state.Timer + 1,
-      });
-    }, 5000);
-    console.log("componentDidMount called");
+    console.log("componentDidMount called!");
   }
-  componentDidUpdate() {
-    console.log("componentDidUpdate called");
+  componentDidUpdate(prevProps, prevState) {
+    console.log("componentDidUpdate called!");
+    console.log({ prevProps, prevState });
+    if (prevState.Refresh !== this.state.Refresh) {
+      window.alert("Call the API!");
+    }
   }
   render() {
-    //DO NOT USE TIMER OR SETTING STATES UINSIDE RENDER FUNCTION
-
-    if (false && this.state.Salutation !== "Hello")
-      console.log("render Called!");
+    console.log("render called!");
     return (
       <div className="App">
         <p>
-          {this.state.Salutation}
-          {this.state.Name}
+          Hello.{" "}
+          {this.state.Name.trim().length === 0
+            ? "Please Enter your Name!"
+            : `My name is ${this.state.Name}!`}
         </p>
-        <p>Timer: {this.state.Timer}</p>
-        <SameFileFuncComp
-          Name="Bharat"
-          arjun="true"
-          Krishna={true}
-          Praveen={15}
+        <input
+          type="text"
+          value={this.state.Name}
+          onChange={(e) => {
+            this.setState({ Name: e.target.value });
+          }}
         />
-        console.log();
+        <br />
+        <input
+          type="text"
+          value={this.state.Name}
+          onChange={(e) => {
+            this.setState({ Name: e.target.value });
+          }}
+        />
+        <br />
+        <button
+          onClick={() => {
+            this.setState({ Refresh: !this.state.Refresh });
+          }}
+          disabled={this.state.Name.trim().length === 0}
+        >
+          Refresh
+        </button>
       </div>
     );
   }
