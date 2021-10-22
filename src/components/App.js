@@ -5,19 +5,15 @@ class App extends Component {
   state = {
     Dark: false,
   };
-
+  toggleNav = () => {
+    this.setState({ Dark: !this.state.Dark });
+  };
   render() {
     return (
       <div className="App">
-        <Navbar dark={this.state.Dark}>React Application </Navbar>
-        <button
-          className="btn btn-primary"
-          onClick={() => {
-            this.setState({ Dark: !this.state.Dark });
-          }}
-        >
-          Switch
-        </button>
+        <Navbar dark={this.state.Dark} toggleNav={this.toggleNav}>
+          React Application{" "}
+        </Navbar>
       </div>
     );
   }
